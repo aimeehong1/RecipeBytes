@@ -1,33 +1,6 @@
-* {
-  box-sizing: border-box;
-}
-[hidden] {
-  display: none !important;
-}
-
-body,
-section,
-header,
-div,
-p,
-h1,
-h2,
-h3,
-ul,
-li,
-figure,
-label,
-span,
-figcaption {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
-}
-
 .pantry-body {
-  overflow-y:hidden;
-  height:100%;
+  overflow-y: hidden;
+  height: 100%;
 }
 
 .container {
@@ -36,7 +9,7 @@ figcaption {
   height: 100%;
   align-items: flex-start;
   justify-content: space-between;
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .container h1 {
@@ -50,40 +23,42 @@ figcaption {
 }
 
 .header h1 {
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
+  font-family: "Patrick Hand SC", cursive;
+  font-size: 28px; /* Larger header text */
 }
 
 .pantry {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
-  grid-gap: 45px;
+  grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columns */
+  grid-auto-rows: auto; /* Dynamic row heights */
+  grid-gap: 30px; /* Spacing between grid items */
   padding: 20px;
   justify-content: space-between;
   border-radius: 20px;
-  font-family: "Inter", "Open Sans", "Times New Roman", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  padding: 2px;
+  padding: 10px;
   border: 1px solid black;
 }
 
 .form h2 {
-  padding: 5px 0px;
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
+  padding: 10px 0;
+  font-family: "Patrick Hand SC", cursive;
   text-align: center;
+  font-size: 20px;
 }
 
 .form button {
-  padding: 5px;
-  margin: 5px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 10px;
   background: #d1e6f9;
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
+  font-family: "Patrick Hand SC", cursive;
 }
 
 .form button:hover {
@@ -92,17 +67,17 @@ figcaption {
 }
 
 .pantry h2 {
-  padding: 10px 0px;
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
+  padding: 10px 0;
+  font-family: "Patrick Hand SC", cursive;
 }
 
 .pantry ul {
-  padding: 5px 0px;
+  padding: 5px 0;
 }
 
 .pantry ul li {
   list-style: none;
-  padding: 7px 0px;
+  padding: 7px 0;
 }
 
 .pantry input {
@@ -115,14 +90,17 @@ figcaption {
 }
 
 .expirationLabel {
-  background-color: #b3ccff;
+  background-color: #d1e6f9;
   border-radius: 15px;
-  margin-left:21px;
-  padding: 0px 10px;
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  text-align: center;
 }
 
 .expired {
   background-color: #ff8080;
+  color: white;
 }
 
 .soonToExpire {
@@ -131,36 +109,49 @@ figcaption {
 
 .produce,
 .protein,
-.dairy,
-.grain,
-.other {
-  background-color: #d1e6f9;
+.dairy {
+  background-color: rgba(226, 240, 252, 0.5);
   display: flex;
   flex-direction: column;
-  padding: 3em;
+  padding: 2em;
   border-radius: 20px;
   height: 100%;
-  grid-row: 1 / span 2;
+  grid-column: span 1; /* Full column for other categories */
+  grid-row: 1 / 3;
 }
 
-.noItem {
-  font-family: "Patrick Hand SC", "Open Sans", "Times New Roman", sans-serif;
+.grain,
+.other {
+  background-color: rgba(226, 240, 252, 0.5);
+  display: flex;
+  grid-column-start: 4;
+  flex-direction: column;
+  padding: 2em;
+  border-radius: 20px;
+  height: auto;
+  grid-column: span 1; /* Shared column for Grains and Other */
 }
 
 .grain {
-  grid-row: 1;
-} 
+  grid-row: span 1; /* First half of the column */
+}
+
 .other {
-  grid-row: 2;
+  grid-row: span 1; /* Second half of the column */
 }
 
-.smallColumn {
-  min-height: 23em;
+.noItem {
+  font-family: "Patrick Hand SC", cursive;
+  font-size: 16px;
+  color: gray;
+  text-align: center;
 }
 
-@media (max-width: 950px) {
+
+@media (max-width: 600px) {
   .pantry {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
   }
 
   .produce,
@@ -168,15 +159,28 @@ figcaption {
   .dairy,
   .grain,
   .other {
-    padding: 3em;
-    min-height: 100%;
-    grid-row: auto;
+    padding: 1.5em;
   }
-}
 
+  .container h1 {
+    font-size: 25px;
+    padding: 5px;
+  }
 
-@media (max-width: 600px) {
-  .pantry {
-    grid-template-columns: 1fr;
+  .form h2 {
+    font-size: 18px;
+  }
+
+  .form button {
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .pantry ul li {
+    font-size: 18px;
+  }
+
+  .pantry label {
+    font-size: 18px;
   }
 }

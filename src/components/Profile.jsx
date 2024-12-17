@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import css from './../styles/Profile.module.css'
-import Avatar from './../assets/Avatar.png'
+import css from './../styles/Profile.module.css';
+import Avatar from './../assets/Avatar.png';
 import { getAuth, signOut, updateProfile } from 'firebase/auth';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { TextField, IconButton, InputAdornment } from '@mui/material';
+import { TextField } from '@mui/material';
 
 export default function Pantry() {
   const auth = getAuth();
@@ -14,35 +13,49 @@ export default function Pantry() {
   const userId = user.uid;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [photo, setPhoto] = useState(null);
   const [photoURL, setPhotoURL] = useState(Avatar);
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
-  const storage = getStorage();
 
   const handleLogout = async () => {
-    const auth = getAuth();
     try {
       await signOut(auth);
-      navigate('/login');
+      navigate('/login'); // Redirect to login page
     } catch (error) {
       console.error('Logout failed:', error.message);
     }
   };
 
   const toggleForm = () => {
-    setShowForm(prevShowForm => !prevShowForm);
+    setShowForm((prevShowForm) => !prevShowForm);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     await updateProfile(auth.currentUser, {
-      displayName: firstName && lastName ? `${firstName} ${lastName}` : user.displayName
-    })
-    navigate('/')
-    setShowForm(false)
+      displayName: firstName && lastName ? `${firstName} ${lastName}` : user.displayName,
+    });
+    navigate('/');
+    setShowForm(false);
   };
+
+  // const handleChange = async (e) => {
+  //   if (e.target.files[0]) {
+  //     setPhoto(e.target.files[0]);
+  //   }
+  //   uploadProfileImage(photo, setLoading).then((url) => {
+  //     setPhotoURL(url);
+  //   });
+  // };
+
+//   // storage for user's profile image
+//  async function uploadProfileImage(file, userId, setLoading) {
+//   const storageRef = ref(storage, `profileImages/${userId}`);
+//   setLoading(true);
+//   await uploadBytes(storageRef, file);
+//   setLoading(false);
+//   return getDownloadURL(storageRef);
+// }
 
   return <main className={css.container}>
     <section className={css.profileAvatar}>
